@@ -1,6 +1,7 @@
 package rest
 
 import (
+	"context"
 	"crypto/md5"
 	"errors"
 	"fmt"
@@ -98,7 +99,7 @@ func (s *Server) Stop() error {
 		return errors.New("Server not started")
 	}
 
-	if err := s.listener.Close(); err != nil {
+	if err := s.Shutdown(context.Background()); err != nil {
 		return err
 	}
 
